@@ -1,0 +1,13 @@
+# --- PUBLIC SAFE DEFAULTS ---
+image:
+  repository: ghcr.io/mcreagu/waste-monitor
+  tag: v1
+  pullPolicy: Always
+
+# --- APP CONFIGURATION ---
+appConfig:
+  orionHost: "172.21.32.104"    
+  orionPort: "1026"
+  entityId: "urn:ngsi-ld:WasteContainer:67-49-e4-49-70-22-00-28"
+  telegramBotToken: ""          
+  telegramChatId: ""            

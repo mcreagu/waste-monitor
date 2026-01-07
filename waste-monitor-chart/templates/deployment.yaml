@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-monitor
+  labels:
+    app: waste-monitor
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: waste-monitor
+  template:
+    metadata:
+      labels:
+        app: waste-monitor
+    spec:
+      imagePullSecrets:
+        - name: {{ .Release.Name }}-ghcr-secret
+      containers:
+        - name: monitor
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          env:
+            - name: ORION_HOST
+              value: {{ .Values.appConfig.orionHost | quote }}
+            - name: ORION_PORT
+              value: {{ .Values.appConfig.orionPort | quote }}
+            - name: ENTITY_ID
+              value: {{ .Values.appConfig.entityId | quote }}
+            - name: TELEGRAM_BOT_TOKEN
+              value: {{ .Values.appConfig.telegramBotToken | quote }}
+            - name: TELEGRAM_CHAT_ID
+              value: {{ .Values.appConfig.telegramChatId | quote }}
