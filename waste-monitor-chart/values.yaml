@@ -1,7 +1,7 @@
 # --- PUBLIC SAFE DEFAULTS ---
 image:
   repository: ghcr.io/mcreagu/waste-monitor
-  tag: v1
+  tag: latest
   pullPolicy: Always
 
 # --- APP CONFIGURATION ---

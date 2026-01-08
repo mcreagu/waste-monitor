@@ -14,8 +14,6 @@ spec:
       labels:
         app: waste-monitor
     spec:
-      imagePullSecrets:
-        - name: {{ .Release.Name }}-ghcr-secret
       containers:
         - name: monitor
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"

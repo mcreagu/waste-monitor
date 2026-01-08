@@ -2,6 +2,7 @@ import os
 import requests
 import json
 from datetime import datetime
+import time
 
 # --- CONFIGURATION ---
 # We use .get() with defaults so it doesn't crash if env vars are missing
@@ -83,15 +84,21 @@ def send_telegram(message):
         print(f"[!] CONNECTION ERROR: {e}")
 
 if __name__ == "__main__":
+    print("[-] Service started. Monitoring Waste Container (Default interval: 30 mins)...")
     # Check credentials first
     if not TELEGRAM_BOT_TOKEN:
         print("⚠️  WARNING: No Bot Token found. Please export TELEGRAM_BOT_TOKEN.")
     
-    data = get_entity_data()
-    
-    if data:
-        msg = format_message(data)
-        print("\n--- PREVIEW ---")
-        print(msg)
-        print("---------------\n")
-        send_telegram(msg)
+    while True:
+        # --- 1. Do the work ---
+        print(f"\n[-] Running check at {datetime.now().strftime('%H:%M:%S')}...")
+        data = get_entity_data()
+        if data:
+            msg = format_message(data)
+            print("\n--- PREVIEW ---")
+            print(msg)
+            print("---------------\n")
+            send_telegram(msg)
+        # --- 2. Sleep for 30 minutes ---
+        print("[-] Sleeping for 30 minutes...")
+        time.sleep(1800)  # 1800 seconds = 30 minutes
