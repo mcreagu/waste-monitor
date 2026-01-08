@@ -1,6 +1,6 @@
 # --- PUBLIC SAFE DEFAULTS ---
 image:
-  repository: ghcr.io/mcreagu/waste-monitor
+  repository: harbor.cop-pilot.rid-intrasoft.eu/cluster2-upv-waste-management/waste-monitor
   tag: latest
   pullPolicy: Always
 
